@@ -1,2 +1,0 @@
-docker run  --name minecraft -p 8123:8123 -p 25565:25565 --volumes-from minecraft-data -e EULA=TRUE -e VERSION=1.11.2 -d --rm itzg/minecraft-server
-
