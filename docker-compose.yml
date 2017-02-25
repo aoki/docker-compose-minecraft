@@ -1,27 +1,30 @@
 version: '2'
 services:
+  # data:
+  #   image: alpine
+  #   entrypoint: /bin/sh
   server:
     image: itzg/minecraft-server
     ports:
       - '25565:25565'
       - '8123:8123'
-    volumes_from:
-      - data
+    # volumes_from:
+    #   - data
+    volumes:
+      - data:/data
     environment:
       EULA: 'TRUE'
       VERSION: '1.11.2'
       TYPE: 'SPIGOT'
     restart: always
-  fluentd:
-    build: fluentd/
-    ports:
-      - "24224:24224"
-    volumes:
-      - ./fluentd:/fluentd/etc
-      - ./data/:/data/
-    environment:
-      SLACK_WEB_HOOK_URL: ${SLACK_WEB_HOOK_URL}
-  volumes:
-    data:
-      image: alpine
-      external: true
+  # fluentd:
+  #   build: fluentd/
+  #   ports:
+  #     - "24224:24224"
+  #   # volumes_from:
+  #   #   - data
+  #   volumes:
+  #     - ./fluentd:/fluentd/etc
+  #     - ./data:/data
+  #   environment:
+  #     SLACK_WEB_HOOK_URL: ${SLACK_WEB_HOOK_URL}
